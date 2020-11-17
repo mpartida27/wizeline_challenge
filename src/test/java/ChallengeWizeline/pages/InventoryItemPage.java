@@ -1,5 +1,8 @@
 package ChallengeWizeline.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,15 +18,20 @@ public class InventoryItemPage extends CommonMethods {
 	@FindBy(css="div.inventory_details_name")
 	WebElement productNameLabel;
 	
+	@FindBy(css="div.inventory_details_name")
+	List<WebElement> productNameLabelList;
+	
 	@FindBy(css="button.btn_primary")
 	WebElement  addToCartButton;
 	
 	@FindBy(css="div.shopping_cart_container")
 	WebElement shoppingCartButton;
 	
-	public String getProductName() 
+	public List<String> getProductName() 
 	{
-		return getElementText(productNameLabel);
+		List<String> productNames = new ArrayList<String>();
+		productNames.add(getElementText(productNameLabel));
+		return productNames;
 	}
 	
 	public void clickShoppingCartLink() 
@@ -35,5 +43,7 @@ public class InventoryItemPage extends CommonMethods {
 	{
 		clickElement(addToCartButton);
 	}
+
+	
 
 }

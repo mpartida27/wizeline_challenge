@@ -1,5 +1,6 @@
 package ChallengeWizeline.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,8 @@ public class ProductsPage extends CommonMethods
 	{
 		super(driver);
 	}
+	
+	InventoryItemPage inventory = new InventoryItemPage(driver);
 	
 	@FindBy(css=".product_label")
 	WebElement productsLabel;
@@ -51,14 +54,34 @@ public class ProductsPage extends CommonMethods
 		Assert.assertTrue(isElementPresent(productsLabel), "Products Label its not present");
 	}
 	
-	public void addToCartAnyProduct(int numberOfProducts) 
+	public void clickOnAnyProduct() 
 	{
-		clickRandomElementFromAList(inventaryProduct, numberOfProducts);
+		clickRandomElementFromAList(inventaryProduct);
 	}
 	
-	public void clickOnProduct() 
+//	public void clickOnProducts(int numberOfProductsToClick) 
+//	{
+//		clickElementsFromAList(inventaryProduct, numberOfProductsToClick);
+//	}
+	
+	public void goBackToProductsPage() 
 	{
-		clickRandomElementFromAList(inventaryProduct, 1);
+		goBack();
+	}
+	
+	public List<String> clickOnProductsAndAddThemToCart(int numberOfProductsToClick) 
+	{
+		List<String> expectedNames=new ArrayList<String>();
+		for (int i = 0; i < numberOfProductsToClick; i++) 
+		{	
+			clickElementsFromAList(inventaryProduct,i);
+			expectedNames.addAll(inventory.getProductName());
+			inventory.clickAddToCartButton();
+			goBack();
+		}
+		System.out.println(">>>>>>" + expectedNames);
+		return expectedNames;
+		
 	}
 	
 	
