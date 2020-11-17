@@ -23,7 +23,7 @@ public class LoginPage extends CommonMethods {
 	@FindBy(css="#login-button")
 	WebElement loginButton;
 	
-	@FindBy(css="#login_button_container > div > form > h3")
+	@FindBy(css="#login_button_container div form h3")
 	WebElement errorLoginLabel;
 	
 	
