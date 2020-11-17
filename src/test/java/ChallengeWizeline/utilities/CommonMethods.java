@@ -56,10 +56,7 @@ public class CommonMethods extends BaseTest
 	{
 		 Random rand = new Random();
 		 int randomNumber = rand.nextInt(size);
-		 return randomNumber;
-		 
-		 
-		 
+		 return randomNumber; 
 	}
 	
 	public void clickRandomElementFromAList(List <WebElement> elements, int numberOfProducts) 
@@ -68,7 +65,10 @@ public class CommonMethods extends BaseTest
 			List <WebElement> listings = elements;
 			listings.get(i).click();	
 		}	
-		
-		
+	}
+	
+	public String getElementText(WebElement element) 
+	{
+		return element.getText();
 	}
 }
