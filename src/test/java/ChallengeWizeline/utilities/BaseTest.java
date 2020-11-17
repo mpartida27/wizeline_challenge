@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import ChallengeWizeline.pages.InventoryItemPage;
 import ChallengeWizeline.pages.LoginPage;
 import ChallengeWizeline.pages.ProductsPage;
 import ChallengeWizeline.pages.ShoppingCartPage;
@@ -39,6 +41,12 @@ public class BaseTest {
 	{
 		ProductsPage productsPage = new ProductsPage(driver);
 		return productsPage;
+	}
+	
+	public InventoryItemPage inventoryItemPage() 
+	{
+		InventoryItemPage inventoryItemPage = new InventoryItemPage(driver);
+		return inventoryItemPage;
 	}
 	
 	public ShoppingCartPage shoppingCartPage() 

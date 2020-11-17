@@ -32,11 +32,7 @@ public class ProductsPage extends CommonMethods
 	@FindBy(css="#shopping_cart_container a")
 	WebElement shoppingCartButton;
 	
-	String productNames = ".inventory_item a div.inventory_item_name";
-	
-	String addToCartButton = "div.pricebar button";
-	
-	@FindBy(css=".inventory_item")
+	@FindBy(css="div.inventory_item_label a")
 	List<WebElement> inventaryProduct;
 	
 	
@@ -60,9 +56,9 @@ public class ProductsPage extends CommonMethods
 		clickRandomElementFromAList(inventaryProduct, numberOfProducts);
 	}
 	
-	public void clickShoppingCartButton() 
+	public void clickOnProduct() 
 	{
-		clickElement(shoppingCartButton);
+		clickRandomElementFromAList(inventaryProduct, 1);
 	}
 	
 	

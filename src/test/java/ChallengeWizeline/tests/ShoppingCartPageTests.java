@@ -4,8 +4,8 @@ import org.testng.annotations.Test;
 
 import ChallengeWizeline.utilities.BaseTest;
 
-public class ProductsPageTests extends BaseTest  
-{
+public class ShoppingCartPageTests extends BaseTest {
+	
 	@Test
 	public void navigateToShoppingCartAndValidateProduct() 
 	{
@@ -19,6 +19,5 @@ public class ProductsPageTests extends BaseTest
 		inventoryItemPage().clickShoppingCartLink();
 		shoppingCartPage().checkCorrectNameIsAdded(expectedProductName);
 	}
-	
-	
+
 }
