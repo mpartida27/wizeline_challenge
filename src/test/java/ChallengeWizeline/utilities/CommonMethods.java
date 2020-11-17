@@ -1,5 +1,6 @@
 package ChallengeWizeline.utilities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CommonMethods extends BaseTest 
 {
-	WebDriver driver;
+	protected WebDriver driver;
 	WebDriverWait wait;
 	
 	public CommonMethods (WebDriver driver) 
@@ -59,16 +60,39 @@ public class CommonMethods extends BaseTest
 		 return randomNumber; 
 	}
 	
-	public void clickRandomElementFromAList(List <WebElement> elements, int numberOfProducts) 
+	public void clickRandomElementFromAList(List <WebElement> elements) 
 	{
-		for (int i = 0; i < numberOfProducts; i++) {
-			List <WebElement> listings = elements;
-			listings.get(i).click();	
-		}	
+		int randomNumber = randomBumber(elements.size()); 
+		elements.get(randomNumber).click();	
+	}
+	
+	public void clickElementsFromAList(List <WebElement> elements, int number) 
+	{
+		List<WebElement> elementsList = elements;
+		if(number <= elementsList.size()) 
+		{
+			elementsList.get(number).click();
+		}
 	}
 	
 	public String getElementText(WebElement element) 
 	{
 		return element.getText();
+	}
+	
+	public List<String> getElementsText(List<WebElement> elements)
+	{
+		List<WebElement> elementsList = elements;
+		List<String> listToString=new ArrayList<String>();
+		for (int i = 0; i < elementsList.size(); i++) {
+			listToString.add(elementsList.get(i).getText());
+		}
+		
+		return listToString;
+	}
+	
+	public void goBack() 
+	{
+		driver.navigate().back();
 	}
 }
