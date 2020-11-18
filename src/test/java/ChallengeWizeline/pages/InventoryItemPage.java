@@ -18,9 +18,6 @@ public class InventoryItemPage extends CommonMethods {
 	@FindBy(css="div.inventory_details_name")
 	WebElement productNameLabel;
 	
-	@FindBy(css="div.inventory_details_name")
-	List<WebElement> productNameLabelList;
-	
 	@FindBy(css="button.btn_primary")
 	WebElement  addToCartButton;
 	

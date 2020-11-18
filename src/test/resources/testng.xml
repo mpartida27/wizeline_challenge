@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Tests" verbose="5">
-  <test name="Test1">
-    <classes>
-      <class name="ChallengeWizeline..SampleTestNgTest"/>
-    </classes>
-  </test>  
+	<test name="Chrome_Browser">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="ChallengeWizeline.tests.LoginPageTests" />
+			<class name="ChallengeWizeline.tests.CheckOutPageTests" />
+			<class name="ChallengeWizeline.tests.ShoppingCartPageTests" />
+			<class name="ChallengeWizeline.tests.ProductsPageTests" />
+		</classes>
+	</test>
+	<test name="Safari_Browser">
+		<parameter name="browser" value="safari" />
+		<classes>
+			<class name="ChallengeWizeline.tests.LoginPageTests" />
+			<class name="ChallengeWizeline.tests.CheckOutPageTests" />
+			<class name="ChallengeWizeline.tests.ShoppingCartPageTests" />
+			<class name="ChallengeWizeline.tests.ProductsPageTests" />
+		</classes>
+	</test>
 </suite>

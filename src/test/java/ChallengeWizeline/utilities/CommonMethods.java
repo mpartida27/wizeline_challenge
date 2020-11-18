@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -42,6 +43,11 @@ public class CommonMethods extends BaseTest
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	
+	public void waitForElementToBeClickable(WebElement element) 
+	{
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+	}
+	
 	public boolean isElementPresent(WebElement element) 
 	{
 		WebElement elementPresent = wait.until(ExpectedConditions.visibilityOf(element));
@@ -65,14 +71,18 @@ public class CommonMethods extends BaseTest
 	public void clickRandomElementFromAList(List <WebElement> elements) 
 	{
 		int randomNumber = randomBumber(elements.size()); 
-		elements.get(randomNumber).click();	
+		waitForElementToBeClickable(elements.get(randomNumber));
+		elements.get(randomNumber).click();
 	}
 	
 	public void clickElementsFromAList(List <WebElement> elements, int number) 
 	{
+		
 		List<WebElement> elementsList = elements;
 		if(number < elementsList.size()) 
 		{
+			waitForElementToBeClickable(elementsList.get(number));
+			
 			elementsList.get(number).click();
 		}
 	}
@@ -108,4 +118,27 @@ public class CommonMethods extends BaseTest
 		}
 		assertEquals(actualElementsToString, expectedElementList, "Element it's not matching");
 	}
+	
+	public void scrollIntoView(WebElement ele) {
+	    ((JavascriptExecutor)driver).executeScript("window.scrollTo(" + ele.getLocation().x + "," + ele.getLocation().y + ")");
+	}
+
+	public  void waitForJQueryToBeActive() {
+	    Boolean isJqueryUsed = (Boolean) ((JavascriptExecutor) driver)
+	            .executeScript("return (typeof(jQuery) != 'undefined')");
+	    if (isJqueryUsed) {
+	        while (true) {
+	            // JavaScript test to verify jQuery is active or not
+	            Boolean ajaxIsComplete = (Boolean) (((JavascriptExecutor) driver)
+	                    .executeScript("return jQuery.active == 0"));
+	            if (ajaxIsComplete)
+	                break;
+	            try {
+	                Thread.sleep(100);
+	            } catch (InterruptedException e) {
+	            }
+	        }
+	    }
+	}
+	
 }

@@ -29,13 +29,10 @@ public class ProductsPage extends CommonMethods
 	@FindBy(css="#logout_sidebar_link")
 	WebElement logoutSidebarLink;
 	
-	@FindBy(css="#inventory_container  button")
-	List <WebElement> addCartButtons;
-	
 	@FindBy(css="#shopping_cart_container a")
 	WebElement shoppingCartButton;
 	
-	@FindBy(css="div.inventory_item_label a")
+	@FindBy(css=".inventory_item_label a div")
 	List<WebElement> inventaryProduct;
 	
 	

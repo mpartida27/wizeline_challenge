@@ -1,84 +1,86 @@
 package ChallengeWizeline.tests;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.testng.annotations.Test;
 
 import ChallengeWizeline.utilities.BaseTest;
+import ChallengeWizeline.utilities.Data;
 
 public class CheckOutPageTests extends BaseTest {
-	
-	@Test
-	public void validateMissingInformation() 
+		
+	@Test(dataProvider="login-and-checkout-information", dataProviderClass = Data.class)
+	public void validateMissingInformation(HashMap<String, String> data) 
 	{
-		loginPage().enterUserName("standard_user");
-		loginPage().enterUserPassword("secret_sauce");
+		loginPage().enterUserName(data.get("username"));
+		loginPage().enterUserPassword(data.get("password"));
 		loginPage().clickLoginButton();
 		productsPage().isProductsLabelPresent();
 		productsPage().clickOnAnyProduct();
 		inventoryItemPage().clickAddToCartButton();
 		inventoryItemPage().clickShoppingCartLink();
 		inventoryItemPage().clickCheckOutButton();
-		checkOutPage().enterFirstName("");
+		checkOutPage().enterFirstName(data.get("emptyValue"));
 		checkOutPage().clickContinueButton();
-		checkOutPage().checkErrorMessage("Error: First Name is required");
-		checkOutPage().enterFirstName("Juanito");
+		checkOutPage().checkErrorMessage(data.get("firstNameError"));
+		checkOutPage().enterFirstName(data.get("firstName"));
 		checkOutPage().clickContinueButton();
-		checkOutPage().checkErrorMessage("Error: Last Name is required");
-		checkOutPage().enterLastName("Bond");
+		checkOutPage().checkErrorMessage(data.get("lastNameError"));
+		checkOutPage().enterLastName(data.get("lastName"));
 		checkOutPage().clickContinueButton();
-		checkOutPage().checkErrorMessage("Error: Postal Code is required");
+		checkOutPage().checkErrorMessage(data.get("postalCodeError"));
 	}
 	
-	@Test
-	public void validateCorrectInformation() 
+	@Test(dataProvider="login-and-checkout-information", dataProviderClass = Data.class)
+	public void validateCorrectInformation(HashMap<String, String> data) 
 	{
-		loginPage().enterUserName("standard_user");
-		loginPage().enterUserPassword("secret_sauce");
+		loginPage().enterUserName(data.get("username"));
+		loginPage().enterUserPassword(data.get("password"));
 		loginPage().clickLoginButton();
 		productsPage().isProductsLabelPresent();
 		productsPage().clickOnAnyProduct();
 		inventoryItemPage().clickAddToCartButton();
 		inventoryItemPage().clickShoppingCartLink();
 		inventoryItemPage().clickCheckOutButton();
-		checkOutPage().enterFirstName("Juanito");
-		checkOutPage().enterLastName("Bond");
-		checkOutPage().enterPostalCode("11111");
+		checkOutPage().enterFirstName(data.get("firstName"));
+		checkOutPage().enterLastName(data.get("lastName"));
+		checkOutPage().enterPostalCode(data.get("postalCode"));
 		checkOutPage().clickContinueButton();
 		overviewPage().checkOverviewPageLoad();
 	}
 	
-	@Test
-	public void validateItemsOverviewInformation()
+	@Test(dataProvider="login-and-checkout-information", dataProviderClass = Data.class)
+	public void validateItemsOverviewInformation(HashMap<String, String> data)
 	{
-		loginPage().enterUserName("standard_user");
-		loginPage().enterUserPassword("secret_sauce");
+		loginPage().enterUserName(data.get("username"));
+		loginPage().enterUserPassword(data.get("password"));
 		loginPage().clickLoginButton();
 		productsPage().isProductsLabelPresent();
 		List<String> expectedNames = productsPage().clickOnProductsAndAddThemToCart(3);
 		inventoryItemPage().clickShoppingCartLink();
 		inventoryItemPage().clickCheckOutButton();
-		checkOutPage().enterFirstName("Juanito");
-		checkOutPage().enterLastName("Bond");
-		checkOutPage().enterPostalCode("11111");
+		checkOutPage().enterFirstName(data.get("firstName"));
+		checkOutPage().enterLastName(data.get("lastName"));
+		checkOutPage().enterPostalCode(data.get("postalCode"));
 		checkOutPage().clickContinueButton();
 		overviewPage().checkOverviewPageLoad();
 		overviewPage().checkProdutsOnOverViewPage(expectedNames);
 	}
 	
-	@Test
-	public void finishPurchase()
+	@Test(dataProvider="login-and-checkout-information", dataProviderClass = Data.class)
+	public void finishPurchase(HashMap<String, String> data)
 	{
-		loginPage().enterUserName("standard_user");
-		loginPage().enterUserPassword("secret_sauce");
+		loginPage().enterUserName(data.get("username"));
+		loginPage().enterUserPassword(data.get("password"));
 		loginPage().clickLoginButton();
 		productsPage().isProductsLabelPresent();
 		List<String> expectedNames = productsPage().clickOnProductsAndAddThemToCart(3);
 		inventoryItemPage().clickShoppingCartLink();
 		inventoryItemPage().clickCheckOutButton();
-		checkOutPage().enterFirstName("Juanito");
-		checkOutPage().enterLastName("Bond");
-		checkOutPage().enterPostalCode("11111");
+		checkOutPage().enterFirstName(data.get("firstName"));
+		checkOutPage().enterLastName(data.get("lastName"));
+		checkOutPage().enterPostalCode(data.get("postalCode"));
 		checkOutPage().clickContinueButton();
 		overviewPage().checkOverviewPageLoad();
 		overviewPage().checkProdutsOnOverViewPage(expectedNames);

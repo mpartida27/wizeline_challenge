@@ -2,8 +2,10 @@ package ChallengeWizeline.utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import ChallengeWizeline.pages.CheckOutPage;
 import ChallengeWizeline.pages.InventoryItemPage;
@@ -16,10 +18,19 @@ public class BaseTest {
 	
 	WebDriver driver;
 	
+	@Parameters({"browser"})
 	@BeforeMethod
-	public void setUpTestCase() {
-		System.setProperty("webdriver.chrome.driver", "/Users/drivers/chromedriver");
-		driver = new ChromeDriver();
+	public void setUpTestCase(String browser) {
+
+		if (browser.equalsIgnoreCase("chrome")) {
+			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
+			driver = new ChromeDriver();
+		}
+		
+		if(browser.equalsIgnoreCase("safari")) 
+		{
+			driver = new SafariDriver();
+		}
 		goToLandingPage();
 		driver.manage().window().maximize();
 	}

@@ -1,35 +1,38 @@
 package ChallengeWizeline.tests;
 
 
+import java.util.HashMap;
+
 import org.testng.annotations.Test;
 
 import ChallengeWizeline.utilities.BaseTest;
+import ChallengeWizeline.utilities.Data;
 
 public class LoginPageTests extends BaseTest 
 {
-	@Test
-	public void validLoginTest() 
+	@Test(dataProvider="login-user-credentials", dataProviderClass = Data.class)
+	public void validLoginTest(HashMap<String, String> data) 
 	{
-		loginPage().enterUserName("standard_user");
-		loginPage().enterUserPassword("secret_sauce");
+		loginPage().enterUserName(data.get("username"));
+		loginPage().enterUserPassword(data.get("password"));
 		loginPage().clickLoginButton();
 		productsPage().isProductsLabelPresent();
 	}
 	
-	@Test
-	public void LoginInvalidUser() 
+	@Test(dataProvider="login-user-credentials", dataProviderClass = Data.class)
+	public void LoginInvalidUser(HashMap<String, String> data) 
 	{
-		loginPage().enterUserName("invalid_user");
-		loginPage().enterUserPassword("secret_sauce");
+		loginPage().enterUserName(data.get("invalidUser"));
+		loginPage().enterUserPassword(data.get("password"));
 		loginPage().clickLoginButton();
 		loginPage().checkErrorLoginMessage();
 	}
 	
-	@Test
-	public void LoginAndLogOut() 
+	@Test(dataProvider="login-user-credentials", dataProviderClass = Data.class)
+	public void LoginAndLogOut(HashMap<String, String> data) 
 	{
-		loginPage().enterUserName("standard_user");
-		loginPage().enterUserPassword("secret_sauce");
+		loginPage().enterUserName(data.get("username"));
+		loginPage().enterUserPassword(data.get("password"));
 		loginPage().clickLoginButton();
 		productsPage().isProductsLabelPresent();
 		productsPage().clickburgerMenuButton();
