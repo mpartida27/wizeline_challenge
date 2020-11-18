@@ -29,7 +29,7 @@ public class ShoppingCartPageTests extends BaseTest {
 		loginPage().enterUserPassword("secret_sauce");
 		loginPage().clickLoginButton();
 		productsPage().isProductsLabelPresent();
-		List<String> expectedNames = productsPage().clickOnProductsAndAddThemToCart(3);
+		List<String> expectedNames = productsPage().clickOnProductsAndAddThemToCart(6);
 		inventoryItemPage().clickShoppingCartLink();
 		shoppingCartPage().checkCorrectNamesAreAdded(expectedNames);
 	}

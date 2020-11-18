@@ -1,5 +1,7 @@
 package ChallengeWizeline.utilities;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -69,7 +71,7 @@ public class CommonMethods extends BaseTest
 	public void clickElementsFromAList(List <WebElement> elements, int number) 
 	{
 		List<WebElement> elementsList = elements;
-		if(number <= elementsList.size()) 
+		if(number < elementsList.size()) 
 		{
 			elementsList.get(number).click();
 		}
@@ -94,5 +96,16 @@ public class CommonMethods extends BaseTest
 	public void goBack() 
 	{
 		driver.navigate().back();
+	}
+	
+	public void compareTwoLists(List<String> expectedElementList, List<WebElement> actualElementList) 
+	{
+		List<WebElement> actualElements = actualElementList;
+		List<String> actualElementsToString = new ArrayList<>();
+		
+		for (int i = 0; i < actualElements.size(); i++) {
+			actualElementsToString.add(actualElements.get(i).getText());
+		}
+		assertEquals(actualElementsToString, expectedElementList, "Element it's not matching");
 	}
 }

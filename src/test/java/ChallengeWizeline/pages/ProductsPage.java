@@ -58,12 +58,7 @@ public class ProductsPage extends CommonMethods
 	{
 		clickRandomElementFromAList(inventaryProduct);
 	}
-	
-//	public void clickOnProducts(int numberOfProductsToClick) 
-//	{
-//		clickElementsFromAList(inventaryProduct, numberOfProductsToClick);
-//	}
-	
+		
 	public void goBackToProductsPage() 
 	{
 		goBack();
@@ -72,14 +67,22 @@ public class ProductsPage extends CommonMethods
 	public List<String> clickOnProductsAndAddThemToCart(int numberOfProductsToClick) 
 	{
 		List<String> expectedNames=new ArrayList<String>();
+		List<WebElement> productsSize = inventaryProduct;
 		for (int i = 0; i < numberOfProductsToClick; i++) 
 		{	
-			clickElementsFromAList(inventaryProduct,i);
-			expectedNames.addAll(inventory.getProductName());
-			inventory.clickAddToCartButton();
-			goBack();
+			if(i<productsSize.size()) 
+			{
+				clickElementsFromAList(inventaryProduct,i);
+				expectedNames.addAll(inventory.getProductName());
+				inventory.clickAddToCartButton();
+				goBack();
+			}
+			else 
+			{
+				break;
+			}
+			
 		}
-		System.out.println(">>>>>>" + expectedNames);
 		return expectedNames;
 		
 	}

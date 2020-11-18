@@ -22,13 +22,7 @@ public class ShoppingCartPage extends CommonMethods {
 	
 	public void checkCorrectNamesAreAdded(List<String> expectedProductNames) 
 	{
-		List<WebElement> actuaProductlNames = productNames;
-		List<String> actualProductNamesToString = new ArrayList<>();
-		
-		for (int i = 0; i < actuaProductlNames.size(); i++) {
-			actualProductNamesToString.add(actuaProductlNames.get(i).getText());
-		}
-		assertEquals(actualProductNamesToString, expectedProductNames, "Product it's not matching");
+		compareTwoLists(expectedProductNames, productNames);
 	}
 	
 }

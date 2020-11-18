@@ -27,6 +27,9 @@ public class InventoryItemPage extends CommonMethods {
 	@FindBy(css="div.shopping_cart_container")
 	WebElement shoppingCartButton;
 	
+	@FindBy(css=".btn_action")
+	WebElement checkOutButton;
+	
 	public List<String> getProductName() 
 	{
 		List<String> productNames = new ArrayList<String>();
@@ -42,6 +45,11 @@ public class InventoryItemPage extends CommonMethods {
 	public void clickAddToCartButton() 
 	{
 		clickElement(addToCartButton);
+	}
+	
+	public void clickCheckOutButton() 
+	{
+		clickElement(checkOutButton);
 	}
 
 	

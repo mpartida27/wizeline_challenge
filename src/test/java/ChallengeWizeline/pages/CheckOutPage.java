@@ -25,6 +25,9 @@ public class CheckOutPage extends CommonMethods {
 	@FindBy(css="#checkout_info_container  div  form  h3")
 	WebElement errorMessage;
 	
+	@FindBy(css=".btn_primary")
+	WebElement  continueButton;
+	
 	public void isCheckOutLabelPresent() 
 	{
 		Assert.assertTrue(isElementPresent(firstNameTextField), "Check out Label its not present");
@@ -45,8 +48,14 @@ public class CheckOutPage extends CommonMethods {
 		enterText(postalCodeTextField, postalCode);
 	}
 	
+	public void clickContinueButton() 
+	{
+		clickElement(continueButton);
+	}
+	
 	public void checkErrorMessage(String expectedErrorMessage) 
 	{
+		System.out.println(">>>>>>" + errorMessage.getText());
 		Assert.assertEquals(errorMessage.getText(),expectedErrorMessage, "Error Message its not matching to expected");
 	}
 	
